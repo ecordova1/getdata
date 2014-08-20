@@ -30,6 +30,8 @@ Creates a second, independent tidy data set with the average of each variable fo
 
 After the script runs successfully, you will have a new file in the current working directory called "tidydata.txt" which has the tidy data set.
 
+You could open the file using:
+
 
 
 
