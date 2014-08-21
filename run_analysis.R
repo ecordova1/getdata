@@ -16,7 +16,7 @@ features <- read.table("data/UCI HAR Dataset/features.txt", header=FALSE)
 features$V2<-gsub("[(),-]","",features$V2)
 
 #read activity names
-activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", header=FALSE)
+activity_labels <- read.table("data/UCI HAR Dataset/activity_labels.txt", header=FALSE)
 
 #read training data and assign descriptive columns names
 x_train = read.table("data/UCI HAR Dataset/train/X_train.txt",col.names = features$V2)
@@ -49,4 +49,4 @@ data_merge$activity[data_merge$activity == 6] = as.character(activity_labels[6,2
 
 # create a second tidy dataset with the average of each variable for each activity and each subject
 tidy = aggregate(data_merge[,-c(1:2)], by=list(subject = data_merge$id,activity = data_merge$activity),FUN=mean)
-write.table(tidy,"tidydata.txt",row.names=FALSE)
+write.table(tidy,"tidydata.txt")
