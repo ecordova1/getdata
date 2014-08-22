@@ -1,32 +1,28 @@
-# check folder and creates one if it doesn't exist
-if (!file.exists("data")) {
-    dir.create("data")
-}
 # download and unzip dataset
-if (!file.exists("data/Dataset.zip")) {  
+if (!file.exists("Dataset.zip")) {  
   fileURL = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-  zipfile="data/Dataset.zip"
+  zipfile="Dataset.zip"
   download.file(fileURL, destfile=zipfile)
-  unzip(zipfile,exdir="data")
+  unzip(zipfile)
 }
 
 
 #read feature names and removing characters 
-features <- read.table("data/UCI HAR Dataset/features.txt", header=FALSE)
+features <- read.table("UCI HAR Dataset/features.txt", header=FALSE)
 features$V2<-gsub("[(),-]","",features$V2)
 
 #read activity names
-activity_labels <- read.table("data/UCI HAR Dataset/activity_labels.txt", header=FALSE)
+activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt", header=FALSE)
 
 #read training data and assign descriptive columns names
-x_train = read.table("data/UCI HAR Dataset/train/X_train.txt",col.names = features$V2)
-y_train = read.table("data/UCI HAR Dataset/train/y_train.txt",col.names="activity")
-subject_train = read.table("data/UCI HAR Dataset/train/subject_train.txt",col.names="id")
+x_train = read.table("UCI HAR Dataset/train/X_train.txt",col.names = features$V2)
+y_train = read.table("UCI HAR Dataset/train/y_train.txt",col.names="activity")
+subject_train = read.table("UCI HAR Dataset/train/subject_train.txt",col.names="id")
 
 #read test data and assign descriptive columns names
-x_test = read.table("data/UCI HAR Dataset/test/X_test.txt",col.names = features$V2)
-y_test = read.table("data/UCI HAR Dataset/test/y_test.txt",col.names="activity")
-subject_test = read.table("data/UCI HAR Dataset/test/subject_test.txt",col.names="id")
+x_test = read.table("UCI HAR Dataset/test/X_test.txt",col.names = features$V2)
+y_test = read.table("UCI HAR Dataset/test/y_test.txt",col.names="activity")
+subject_test = read.table("UCI HAR Dataset/test/subject_test.txt",col.names="id")
 
 #merge training and test dataset 
 x_merge = rbind(x_train , x_test)
