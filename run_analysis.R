@@ -11,7 +11,7 @@ if (!file.exists("data/Dataset.zip")) {
 }
 
 
-#read feature names and removing illegal characters 
+#read feature names and removing characters 
 features <- read.table("data/UCI HAR Dataset/features.txt", header=FALSE)
 features$V2<-gsub("[(),-]","",features$V2)
 
@@ -49,4 +49,4 @@ data_merge$activity[data_merge$activity == 6] = as.character(activity_labels[6,2
 
 # create a second tidy dataset with the average of each variable for each activity and each subject
 tidy = aggregate(data_merge[,-c(1:2)], by=list(subject = data_merge$id,activity = data_merge$activity),FUN=mean)
-write.table(tidy,"tidydata.txt")
+write.table(tidy,"tidydata.txt",row.names=FALSE)
